@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="societeGeneral" transaction-type="RESOURCE_LOCAL">
+		<description>MySQLForSocieteGeneral</description>
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<!--Test UPOV Environment Details -->
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/societe_generale"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="password"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.connection.zeroDateTimeBehavior" value="convertToNull"/>
+			<property name="hibernate.connection.useUnicode" value="true" />
+			<property name="hibernate.connection.characterEncoding" value="UTF-8" />
+			<property name="hibernate.connection.charSet" value="UTF-8" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>			
+			<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/> 
+			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.show_sql" value="false" />
+  			<property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>   
+  			<property name="hibernate.c3p0.min_size" value="5"/>
+  			<property name="hibernate.c3p0.max_size" value="20"/>
+  			<property name="hibernate.c3p0.timeout" value="300"/>
+  			<property name="hibernate.c3p0.idle_test_period" value="3000"/>
+			<!-- <event type="post-update">
+            	<listener class="org.hibernate.search.event.FullTextIndexEventListener"/>
+        </event>
+        <event type="post-insert">
+            <listener class="org.hibernate.search.event.FullTextIndexEventListener"/>
+        </event>
+        <event type="post-delete">
+            <listener class="org.hibernate.search.event.FullTextIndexEventListener"/>
+        </event>
+        <event type="post-collection-recreate">
+            <listener class="org.hibernate.search.event.FullTextIndexEventListener"/>
+        </event>
+        <event type="post-collection-remove">
+            <listener class="org.hibernate.search.event.FullTextIndexEventListener"/>
+        </event>
+        <event type="post-collection-update">
+            <listener class="org.hibernate.search.event.FullTextIndexEventListener"/>
+        </event>
+        <event type="flush">
+            <listener class="org.hibernate.event.def.DefaultFlushEventListener"/>
+            <listener class="org.hibernate.search.event.FullTextIndexEventListener"/>
+        </event> -->
+			
+				
+  			<!-- Apache DBCP is the connection pool hanging on to the connection, but we do NOT want DBCP to close the connection after every call. 
+  			     The point of the connection pool is to keep a connection ready for the next call because creating connections is expensive. 
+  			     The connection objects maintained by the pool are backed by actual database connections, 
+  			     and the database is the one who closes that actual connection after the idle timeout period. 
+  			     Note that the timeout to close idle connections is configured on the database, not on the connection pool. 
+  			     Because of this, DBCP has no way of knowing whether the connection has been closed or not unless it actually tries to connect with it. 
+  			     That’s why we need a validation query.
+ 			 -->
+  			<property name="validationQuery" value="SELECT 1"/>
+  			<property name="hibernate.generate_statistics"  value="true"/>
+  			<property name="hibernate.format_sql"  value="true"/>
+  			<property name="hibernate.cache.use_structured_entries"  value="true"/>
+		</properties>
+		
+	</persistence-unit>
+</persistence>
